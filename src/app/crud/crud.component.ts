@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { CrudService } from "./../crud.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 
 @Component({
   selector: "app-crud",
@@ -8,13 +9,12 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
   styleUrls: ["./crud.component.css"]
 })
 export class CrudComponent implements OnInit {
-  displayedColumns = ["id", "title"];
-
-  dataSource: any;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   objectKeys = Object.keys;
   tableColumns: string[];
-  data: any[];
+  dataSource: MatTableDataSource<any>;
   models;
   modelName: string;
   model;
@@ -36,11 +36,12 @@ export class CrudComponent implements OnInit {
       this.modelName = params["model"];
 
       this.model = this.models[this.modelName];
-      console.log(this.modelName);
-      console.log(this.model);
       this.list = this.model.list;
-      this.tableColumns = ["id", ...this.list.map(field => field.field)];
-      this.tableColumns.push("actions");
+      this.tableColumns = [
+        "id",
+        ...this.list.map(field => field.field),
+        "actions"
+      ];
       this.fetchData();
 
       this.row = null;
@@ -50,11 +51,18 @@ export class CrudComponent implements OnInit {
   fetchData() {
     this.crud.fetchData(this.modelName).subscribe(
       data => {
-        console.log(data);
-        this.data = data;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
-      error => console.log("server error:" + error)
+      error => console.log("Server error: " + error)
     );
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
   private buildForm(row) {
@@ -72,15 +80,14 @@ export class CrudComponent implements OnInit {
         field.type = "select";
       }
 
-      if (prop && prop.type == "datepicker") {
-        //field.value = moment(row[name]).format("DD.MM.YYYY");
-      }
+      /*if (prop && prop.type == "datepicker") {
+        field.value = moment(row[name]).format("DD.MM.YYYY");
+      }*/
 
       if (prop && prop.type == "pivotRelation") {
         this.fetchOptions(prop);
         field.type = "checklist";
       }
-
       this.form.push(field);
     }
   }

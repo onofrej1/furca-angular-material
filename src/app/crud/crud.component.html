@@ -1,43 +1,55 @@
 <br>
-<div class="row">
 
-    <mat-card [class]="row ? 'col-md-8 offset-md-2': 'col-md-10 offset-md-1'">
-        <div class="mat-elevation-z8" *ngIf="row">
-            <mat-toolbar color="primary" class="mat-elevation-z2" style="height:45px">
+<div class="row">
+    <div class="col-md-8 offset-md-2" *ngIf="row">
+        <div class="mat-elevation-z8">
+            <mat-toolbar color="primary" class="mat-elevation-z3" style="height:45px;">
                 {{ modelName }}
             </mat-toolbar>
             <br>
             <div class="form-wrapper">
-                <app-dynamic-form *ngIf="row" [dataObject]="form" (cancel)="cancel()" (handleForm)="handleForm($event)"></app-dynamic-form>
+                <app-dynamic-form [dataObject]="form" (cancel)="cancel()" (handleForm)="handleForm($event)"></app-dynamic-form>
             </div>
         </div>
+    </div>
 
-        <div class="mat-elevation-z8" *ngIf="!row">
-            <mat-table #table [dataSource]="data" matSort aria-label="Elements">
+    <mat-card class="mat-elevation-z8 col-md-10 offset-md-1" *ngIf="!row">
 
-                <ng-template ngFor let-field [ngForOf]="tableColumns">
-                    <ng-container *ngIf="field != 'actions'" [matColumnDef]="field">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ field }}</mat-header-cell>
-                        <mat-cell *matCellDef="let row">{{row[field]}}</mat-cell>
-                    </ng-container>
-                </ng-template>
-                <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                        <button mat-raised-button color="primary" (click)="setRow(row)">
-                                <mat-icon inlinex="true" style="font-size: 17px">edit</mat-icon> Edit
-                            </button>
-                        <button mat-raised-button color="warn">
-                                <mat-icon inlinex="true" style="font-size: 17px">delete</mat-icon> Delete</button>
-                    </mat-cell>
+        <button mat-raised-button color="secondary" (click)="setRow({})">
+                <mat-icon>add</mat-icon> Add new
+        </button>
+
+        <mat-form-field class="float-right">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+
+        <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+            <ng-template ngFor let-field [ngForOf]="tableColumns">
+                <ng-container *ngIf="field !='actions'" [matColumnDef]="field">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>{{ field }}</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row[field]}}</mat-cell>
                 </ng-container>
-                <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: tableColumns;"></mat-row>
-            </mat-table>
+            </ng-template>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-raised-button color="primary" (click)="setRow(row)">
+                        <mat-icon style="font-size: 17px">edit</mat-icon>
+                        Edit
+                    </button>&nbsp;
+                    <button mat-raised-button color="warn">
+                        <mat-icon style="font-size: 17px">delete</mat-icon> 
+                        Delete
+                    </button>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: tableColumns;"></mat-row>
+        </mat-table>
 
-            <mat-paginator #paginator [length]="data.length" [pageIndex]="0" [pageSize]="50" [pageSizeOptions]="[25, 50, 100, 250]">
-            </mat-paginator>
-        </div>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100, 250]">
+        </mat-paginator>
     </mat-card>
+
 </div>
 <br>
