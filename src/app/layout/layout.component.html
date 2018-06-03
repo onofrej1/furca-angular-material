@@ -1,0 +1,20 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+        <mat-toolbar color="primary" class="mat-elevation-z10">Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/first">First Page</a>
+            <a mat-list-item [routerLink]="['/crud', modelName]" *ngFor="let modelName of modelNames">
+                <mat-icon>view_list</mat-icon> {{ modelName }}</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content style="min-height:700px">
+        <mat-toolbar color="primary" class="mat-elevation-z10">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <img src="assets/images/furca-logo.png" style="height:50px" /><span>O5 Bežecký klub Furča</span>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

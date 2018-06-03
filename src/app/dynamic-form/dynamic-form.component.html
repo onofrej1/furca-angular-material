@@ -1,0 +1,66 @@
+<form novalidate (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+    <mat-grid-list cols="1" rowHeight="70px" gutterSize="10px">
+        <ng-container *ngFor="let prop of dataObject">
+            <div *ngIf="prop.type != 'hidden' else hidden">
+
+                <mat-grid-tile>
+                    <ng-container [ngSwitch]="prop.type">
+
+                        <mat-form-field *ngSwitchCase="'text'" class="block-field">
+                            <input [formControlName]="prop.name" matInput [placeholder]="prop.label || prop.name">
+                        </mat-form-field>
+
+                        <mat-form-field *ngSwitchCase="'date'" class="block-field">
+                            <input [formControlName]="prop.name" matInput [matDatepicker]="picker" [placeholder]="prop.label || prop.name">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field *ngSwitchCase="'select'" class="block-field">
+                            <mat-select [formControlName]="prop.name" [placeholder]="prop.label || prop.name">
+                                <mat-option *ngFor="let option of prop.options" [value]="option.value">
+                                    {{ option.label }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <div class="row form-group-wrapper" *ngSwitchCase="'checklist'">
+                            <div class="col-md-12 form-group-label">{{ prop.label || prop.name }}</div>
+                            <label class="col-md-4" *ngFor="let ctrl of form.controls[prop.name].controls; let i = index">
+                            <mat-checkbox [formControl]="ctrl">{{ prop.options[i].label }}</mat-checkbox>
+                        </label>
+                        </div>
+
+                        <div class="row form-group-wrapper" *ngSwitchCase="'radio'">
+                            <div class="col-md-12 form-group-label">{{ prop.label || prop.name }}</div>
+                            <mat-radio-group [formControlName]="prop.name">
+                                <mat-radio-button class="col-md-4" *ngFor="let option of prop.options" [value]="option.value">
+                                    {{option.label}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                        <!--
+                <textarea *ngSwitchCase="'textarea'" [rows]="prop.rows || 5" class="form-control" [formControlName]="prop.name" [id]="prop.name"></textarea>
+                -->
+                    </ng-container>
+                </mat-grid-tile>
+
+            </div>
+
+            <ng-template #hidden>
+                <input [formControlName]="prop.name" [id]="prop.name" [type]="'hidden'">
+            </ng-template>
+        </ng-container>
+    </mat-grid-list>
+
+    <div>
+        <button type="submit" mat-raised-button color="primary">
+            <mat-icon>done</mat-icon> Save
+        </button>
+        <button mat-raised-button color="secondary" (click)="cancelSubmit()">
+            <mat-icon>arrow_back</mat-icon> Cancel
+        </button>
+    </div>
+
+</form>

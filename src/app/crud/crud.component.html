@@ -1,0 +1,43 @@
+<br>
+<div class="row">
+
+    <mat-card [class]="row ? 'col-md-8 offset-md-2': 'col-md-10 offset-md-1'">
+        <div class="mat-elevation-z8" *ngIf="row">
+            <mat-toolbar color="primary" class="mat-elevation-z2" style="height:45px">
+                {{ modelName }}
+            </mat-toolbar>
+            <br>
+            <div class="form-wrapper">
+                <app-dynamic-form *ngIf="row" [dataObject]="form" (cancel)="cancel()" (handleForm)="handleForm($event)"></app-dynamic-form>
+            </div>
+        </div>
+
+        <div class="mat-elevation-z8" *ngIf="!row">
+            <mat-table #table [dataSource]="data" matSort aria-label="Elements">
+
+                <ng-template ngFor let-field [ngForOf]="tableColumns">
+                    <ng-container *ngIf="field != 'actions'" [matColumnDef]="field">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ field }}</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row[field]}}</mat-cell>
+                    </ng-container>
+                </ng-template>
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button mat-raised-button color="primary" (click)="setRow(row)">
+                                <mat-icon inlinex="true" style="font-size: 17px">edit</mat-icon> Edit
+                            </button>
+                        <button mat-raised-button color="warn">
+                                <mat-icon inlinex="true" style="font-size: 17px">delete</mat-icon> Delete</button>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: tableColumns;"></mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator [length]="data.length" [pageIndex]="0" [pageSize]="50" [pageSizeOptions]="[25, 50, 100, 250]">
+            </mat-paginator>
+        </div>
+    </mat-card>
+</div>
+<br>
