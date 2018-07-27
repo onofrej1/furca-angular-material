@@ -10,7 +10,7 @@ export class CrudService {
 
   //private fields = new Subject<any[]>();
 
-  private baseUrl = "http://localhost/web/laravel/public/";
+  private baseUrl = "http://nessbox.local:8000/";
 
   public getModels() {
     return models;

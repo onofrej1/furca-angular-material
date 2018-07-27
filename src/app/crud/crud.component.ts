@@ -32,9 +32,9 @@ export class CrudComponent implements OnInit {
 
   ngOnInit() {
     this.models = this.crud.getModels();
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {      
       this.modelName = params["model"];
-
+      
       this.model = this.models[this.modelName];
       this.list = this.model.list;
       this.tableColumns = [

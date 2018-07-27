@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 import { MaterialModule } from "./material.module";
-import { LayoutComponent } from "./layout/layout.component";
+import { AdminLayoutComponent } from "./admin-layout/admin-layout.component";
 import { LayoutModule } from "@angular/cdk/layout";
 
 import { FirstPageComponent } from "./first-page/first-page.component";
@@ -17,22 +17,35 @@ import { TableComponent } from "./table/table.component";
 import { DynamicFormComponent } from "./dynamic-form/dynamic-form.component";
 import { CrudComponent } from "./crud/crud.component";
 import { CrudService } from "./crud.service";
+import { LayoutComponent } from './layout/layout.component';
 
 const appRoutes: Routes = [
-  { path: "first", component: FirstPageComponent },
-  { path: "admin", component: AdminComponent },
-  { path: "crud/:model", component: CrudComponent }
+  { 
+    path: '', 
+    component: LayoutComponent,
+    children: [
+      { path: "first", component: FirstPageComponent },
+    ]
+  },  
+  { 
+    path: 'admin', 
+    component: AdminLayoutComponent,
+    children: [
+      { path: "crud/:model", component: CrudComponent },      
+    ]
+  },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,
+    AdminLayoutComponent,
     FirstPageComponent,
     AdminComponent,
     TableComponent,
     CrudComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
