@@ -17,16 +17,26 @@ import { TableComponent } from "./table/table.component";
 import { DynamicFormComponent } from "./dynamic-form/dynamic-form.component";
 import { CrudComponent } from "./crud/crud.component";
 import { CrudService } from "./crud.service";
+import { SidebarLayoutComponent } from './sidebar-layout/sidebar-layout.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ResultsComponent } from './results/results.component';
 
 const appRoutes: Routes = [
+  
   { 
     path: '', 
     component: LayoutComponent,
     children: [
+      { path: "results", component: ResultsComponent },
+    ]
+  }, 
+  { 
+    path: '', 
+    component: SidebarLayoutComponent,
+    children: [
       { path: "first", component: FirstPageComponent },
     ]
-  },  
+  }, 
   { 
     path: 'admin', 
     component: AdminLayoutComponent,
@@ -45,7 +55,9 @@ const appRoutes: Routes = [
     TableComponent,
     CrudComponent,
     DynamicFormComponent,
-    LayoutComponent
+    LayoutComponent,
+    SidebarLayoutComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,66 @@
+<div>
+  <img src="assets/images/header.jpg" />
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">  
+  <div class="row mt-4 mb-4">
+    <div class="col-md-1"></div>
+    <div class="col-md-7 mat-elevation-z6 mr-3 p-0">
+      <div class="box-heading mt-2 p-2">
+        <ng-content select=".heading">
+          
+        </ng-content>
+      </div>
+      <div class="p-3">
+        <router-outlet></router-outlet>
+      </div>        
+    </div>
+
+    <div class="col-md-3 mat-elevation-z6 mr-3 p-0">
+        <div class="box-heading mt-2 p-2">
+          Aktuality
+        </div>
+        <div class="p-3">
+         aaa
+        </div>        
+    </div>
+    
+    <div class="col-md-1"></div>  
+  </div>  
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container">
+      <div class="navbar-text pull-left">
+          <div>O5 bežecký klub FURČA </div>
+          <div>Tokajícka 2, 040 22 Košice Mobil: 0904 246 060</div>
+          <div>E-mail: bohunek.zdenek@maratonfurca.sk</div>
+      </div>
+      <div class="btn navbar-btn btn-default btn-sm  pull-right">
+          <a href="http://youtu.be/zJahlKPCL9g" class="text-gray" >
+            webstránka:<span class="glyphicon glyphicon-envelope"></span>
+            erikonofrej@maratonfurca.sk
+          </a>
+          <a href="http://www.toplist.sk/" target="_top">
+              <img src="http://toplist.sk/count.asp?id=1254971&logo=mc" border="0" alt="TOPlist" width="88" height="60" />
+          </a>
+      </div>
+  </div>
+</nav>
+
+

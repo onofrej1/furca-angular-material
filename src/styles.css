@@ -28,8 +28,8 @@ body {
 
 .box-heading {
     color: #fff;
-    background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%) !important;
-    border-color: #4cae4c;
+    /*background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%) !important;*/
+    background-color: #343a40;
     font-weight: bold;
     font-size: 1em;
     height: 40px;

@@ -1,42 +1,4 @@
-<div>
-  <img src="assets/images/header.jpg" />
-</div>
-<mat-menu #appMenu="matMenu">
-  <ng-template matMenuContent>
-    <button mat-menu-item>Settings</button>
-    <button mat-menu-item>Help</button>
-  </ng-template>
-</mat-menu>
-
-<div class="mat-elevation-z10 bg-dark text-white text-center">
-  <button mat-icon-button [matMenuTriggerFor]="appMenu">
-    O5 BK Furca
-  </button>
-</div>
-
-<div class="container">  
-  <div class="row mt-4 mb-4">
-    <div class="col-md-1"></div>
-    <div class="col-md-7 mat-elevation-z6 mr-3 p-0">
-      <div class="box-heading mt-2 p-2">
-        Page
-      </div>
-      <div class="p-3">
-        <router-outlet></router-outlet>
-      </div>        
-    </div>
-
-    <div class="col-md-3 mat-elevation-z6 mr-3 p-0">
-        <div class="box-heading mt-2 p-2">
-          Aktuality
-        </div>
-        <div class="p-3">
-          <router-outlet></router-outlet>
-        </div>        
-    </div>
-    
-    <div class="col-md-1"></div>  
-  </div>  
-</div>
-
-
+<p>
+  layout works! tt
+  <router-outlet></router-outlet>
+</p>
