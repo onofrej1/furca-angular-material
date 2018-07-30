@@ -32,14 +32,14 @@ const appRoutes: Routes = [
   }, 
   { 
     path: '', 
-    component: SidebarLayoutComponent,
+    //component: SidebarLayoutComponent,
     children: [
       { path: "first", component: FirstPageComponent },
     ]
   }, 
   { 
     path: 'admin', 
-    component: AdminLayoutComponent,
+    //component: AdminLayoutComponent,
     children: [
       { path: "crud/:model", component: CrudComponent },      
     ]
