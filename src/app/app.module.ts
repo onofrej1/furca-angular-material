@@ -23,20 +23,8 @@ import { ResultsComponent } from './results/results.component';
 
 const appRoutes: Routes = [
   
-  { 
-    path: '', 
-    component: LayoutComponent,
-    children: [
-      { path: "results", component: ResultsComponent },
-    ]
-  }, 
-  { 
-    path: '', 
-    //component: SidebarLayoutComponent,
-    children: [
-      { path: "first", component: FirstPageComponent },
-    ]
-  }, 
+  { path: "first", component: FirstPageComponent },
+  { path: "results", component: ResultsComponent },
   { 
     path: 'admin', 
     //component: AdminLayoutComponent,

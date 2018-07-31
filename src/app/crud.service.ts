@@ -10,7 +10,7 @@ export class CrudService {
 
   //private fields = new Subject<any[]>();
 
-  private baseUrl = "http://nessbox.local:8000/";
+  private baseUrl = "http://localhost:8000/";
 
   public getModels() {
     return models;
