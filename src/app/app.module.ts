@@ -20,11 +20,14 @@ import { CrudService } from "./crud.service";
 import { SidebarLayoutComponent } from './sidebar-layout/sidebar-layout.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ResultsComponent } from './results/results.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { MenuComponent } from './menu/menu.component';
 
 const appRoutes: Routes = [
   
   { path: "first", component: FirstPageComponent },
-  { path: "results", component: ResultsComponent },
+  { path: "vysledky", component: ResultsComponent },
   { 
     path: 'admin', 
     //component: AdminLayoutComponent,
@@ -45,7 +48,10 @@ const appRoutes: Routes = [
     DynamicFormComponent,
     LayoutComponent,
     SidebarLayoutComponent,
-    ResultsComponent
+    ResultsComponent,
+    HeaderComponent,
+    FooterComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

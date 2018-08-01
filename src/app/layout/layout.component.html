@@ -1,4 +1,22 @@
-<p>
-  layout works! tt
-  <router-outlet></router-outlet>
-</p>
+<app-header></app-header>
+
+<div class="container">  
+  <div class="row mt-4 mb-4">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 mat-elevation-z6 mr-3 p-0">
+      <div class="box-heading mt-2 p-2">
+        <ng-content select="[heading]">
+        </ng-content>
+      </div>
+      <div class="p-3">
+        <ng-content></ng-content>
+      </div>        
+    </div>
+
+    <div class="col-md-1"></div>  
+  </div>  
+</div>
+
+<app-footer></app-footer>
+
+
