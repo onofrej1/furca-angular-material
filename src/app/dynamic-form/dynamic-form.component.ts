@@ -10,6 +10,24 @@ import {
 } from "@angular/core";
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { BrowserModule, DomSanitizer } from "@angular/platform-browser";
+import Quill from 'quill/core';
+//let Quill = require('quill');
+import Snow from 'quill/themes/snow';
+import Toolbar from 'quill/modules/toolbar';
+import Bold from 'quill/formats/bold';
+import Italic from 'quill/formats/italic';
+import Header from 'quill/formats/header';
+import "quill/dist/quill.core.css"
+import "quill/dist/quill.snow.css"
+
+
+Quill.register({
+  'themes/snow': Snow,
+  'modules/toolbar': Toolbar,
+  'formats/bold': Bold,
+  'formats/italic': Italic,
+  'formats/header': Header
+});
 
 @Component({
   selector: "app-dynamic-form",
@@ -21,12 +39,30 @@ export class DynamicFormComponent {
 
   @Input() dataObject;
   form: FormGroup;
+  editorElem;
 
   @Output() handleForm = new EventEmitter();
 
   @Output() cancel = new EventEmitter();
 
-  constructor() {}
+  constructor(private elementRef: ElementRef) {
+
+  }
+
+  ngAfterViewInit()  {
+
+    this.editorElem = this.elementRef.nativeElement.querySelector(
+      '[editor]'
+);
+    var quill = new Quill(this.editorElem, {
+      //theme: 'themes/snow',
+      
+    });
+
+    quill.on('text-change', function(delta, oldDelta, source) {
+      console.log('change', delta)
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const formGroup = {};

@@ -6,7 +6,7 @@
                 <mat-grid-tile>
                     <ng-container [ngSwitch]="prop.type">
 
-                        <mat-form-field *ngSwitchCase="'text'" class="block-field">
+                        <mat-form-field *ngSwitchCase="'textx'" class="block-field">
                             <input [formControlName]="prop.name" matInput [placeholder]="prop.label || prop.name">
                         </mat-form-field>
 
@@ -40,6 +40,7 @@
                             </mat-radio-group>
                         </div>
 
+                        <div *ngSwitchCase="'text'" editor   >aaaaa</div>
                         <!--
                 <textarea *ngSwitchCase="'textarea'" [rows]="prop.rows || 5" class="form-control" [formControlName]="prop.name" [id]="prop.name"></textarea>
                 -->
